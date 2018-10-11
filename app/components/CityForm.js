@@ -6,6 +6,25 @@ var spaceAroundRow = {
   justifyContent: 'space-around',
 }
 
+var inputStyle = {
+  width: '14em',
+  fontSize: '1.4em',
+  padding: '.2em',
+  letterSpacing: '.06em',
+  borderRadius: '.3em',
+  border: '2px solid lightgrey',
+}
+
+var buttonStyle = {
+  display: 'block',
+  margin: '1em auto',
+  width: '7em',
+  borderRadius: '.3em',
+  fontSize: '1.4em',
+  cursor: 'pointer',
+  border: '1px solid lightgrey',
+}
+
 var mapStyle = {
   width: '25em',
   height: '25em',
@@ -14,7 +33,8 @@ var mapStyle = {
 
 function ResetCity(props) {
   return (
-    <h4 onClick={props.onReset.bind(this, props.cityId)}>reset</h4>
+    <h4 style={{color: 'red', cursor: 'pointer'}} 
+      onClick={props.onReset.bind(this, props.cityId)}>reset</h4>
   )
 }
 
@@ -59,10 +79,12 @@ class FormView extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <input 
+          style={inputStyle}
           type={'text'} 
           onChange={this.handleChange}
           value={this.state.value} />
         <button
+          style={buttonStyle}
           disabled={!this.state.value}
           type={'submit'}>
           Submit
