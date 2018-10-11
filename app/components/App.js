@@ -1,9 +1,10 @@
 var React = require('react');
+var Main = require('./Main');
 
 class App extends React.Component {
   render() {
     return (
-      <h1>Hi</h1>
+      <Main />
     )
   }
 }
