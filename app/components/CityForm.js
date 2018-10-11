@@ -1,8 +1,15 @@
 var React = require('react');
 var PropTypes = require('prop-types');
 
-var formContainerStyle = {
+var spaceAroundRow = {
   display: 'flex',
+  justifyContent: 'space-around',
+}
+
+var mapStyle = {
+  width: '25em',
+  height: '25em',
+  background: 'violet',
 }
 
 function ResetCity(props) {
@@ -21,6 +28,7 @@ function MapView(props) {
     <div>
       <h1>{props.city}</h1>
       <h2>{props.coords}</h2>
+      <div style={mapStyle}></div>
     </div>
   )
 }
@@ -99,26 +107,35 @@ class CityForm extends React.Component {
   }
   render() {
     return (
-      <div style={formContainerStyle}>
-        <FormView 
-          handleSubmit={this.handleSubmit}
-          cityId={'city1'}
-          city={this.state.city1} 
-          coords={this.state.coords1}/>
-        {this.state.city1 && 
-          <MapView city={this.state.city1} coords={this.state.coords1} />}
-        {this.state.city1 && 
-          <ResetCity onReset={this.handleReset} cityId={'city1'}/>}
+      <div>
+        <div style={spaceAroundRow}>
+          <FormView 
+            handleSubmit={this.handleSubmit}
+            cityId={'city1'}
+            city={this.state.city1} 
+            coords={this.state.coords1}/>
 
-        <FormView 
-          handleSubmit={this.handleSubmit}
-          cityId={'city2'}
-          city={this.state.city2} 
-          coords={this.state.coords2}/>
-        {this.state.city2 && 
-          <MapView city={this.state.city2} coords={this.state.coords2} />}
-        {this.state.city2 && 
-          <ResetCity onReset={this.handleReset} cityId={'city2'} />}
+          <FormView 
+            handleSubmit={this.handleSubmit}
+            cityId={'city2'}
+            city={this.state.city2} 
+            coords={this.state.coords2}/>
+        </div>
+
+        <div style={spaceAroundRow}>
+          {this.state.city1 && 
+            <MapView city={this.state.city1} coords={this.state.coords1} />}
+          {this.state.city2 && 
+            <MapView city={this.state.city2} coords={this.state.coords2} />}
+        </div>
+
+        <div style={spaceAroundRow}>
+          {this.state.city1 && 
+            <ResetCity onReset={this.handleReset} cityId={'city1'}/>}
+
+          {this.state.city2 && 
+            <ResetCity onReset={this.handleReset} cityId={'city2'} />}
+        </div>
       </div>
     )
   }
