@@ -1,7 +1,9 @@
-#City Map Compare
+# City Map Compare
 
 React App for visualizing the size of cities.
 Synchronous zooming on google maps apo
+
+[link]: https://city-map-compare.firebaseapp.com/
 
 
 ## Firebase Deploy
@@ -45,9 +47,13 @@ Create new project
   ```
 
   select deploy app?
+
   select the app you created on the website
+
   what do you want to use as your public directory? dist
+
   select yes for single page app
+
   already exists, overwrite? N
   
   npm run deploy

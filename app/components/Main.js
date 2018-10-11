@@ -1,4 +1,5 @@
 var React = require('react');
+var CityForm = require('./CityForm');
 
 var h1Style = {
   display: 'flex',
@@ -30,6 +31,7 @@ class Main extends React.Component {
     return (
       <div>
         <Heading />
+        <CityForm />
       </div>
     )
   }
