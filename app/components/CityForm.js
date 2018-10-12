@@ -1,11 +1,11 @@
 var React = require('react');
 var PropTypes = require('prop-types');
 var MapView = require('./MapView');
+var getCoords = require('../../app/utils/api');
 
 var spaceAroundRow = {
   display: 'flex',
   justifyContent: 'space-around',
-  zIndex: '10',
 }
 
 var inputStyle = {
@@ -53,24 +53,29 @@ class FormView extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.handleSubmit(this.props.cityId, this.state.value);
-    this.setState({value: ''});
+    getCoords(this.state.value).then(function(data) {
+      this.props.handleSubmit(this.props.cityId, data);
+      this.setState({value: ''});
+    }.bind(this));
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input 
-          style={inputStyle}
-          type={'text'} 
-          onChange={this.handleChange}
-          value={this.state.value} />
-        <button
-          style={buttonStyle}
-          disabled={!this.state.value}
-          type={'submit'}>
-          Submit
-        </button>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input 
+            style={inputStyle}
+            type={'text'} 
+            onChange={this.handleChange}
+            value={this.state.value} />
+          <button
+            style={buttonStyle}
+            disabled={!this.state.value}
+            type={'submit'}>
+            Submit
+          </button>
+        </form>
+        <h3 style={spaceAroundRow}>{this.props.city}</h3>
+      </div>
     )
   }
 }
@@ -94,11 +99,13 @@ class CityForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleReset = this.handleReset.bind(this);
   }
-  handleSubmit(cityId, cityName) {
+  handleSubmit(cityId, data) {
+    this.handleReset(cityId)
+    console.log(data); 
     if (cityId === 'city1') {
-      this.setState({city1: cityName, coords1: [-27.643387, 151.612224]})
+      this.setState({city1: data.location, coords1: [data.coords.lat, data.coords.lng]})
     } else {
-      this.setState({city2: cityName, coords2: [24.643387, 121.612224]})
+      this.setState({city2: data.location, coords2: [data.coords.lat, data.coords.lng]})
     }
   }
   handleReset(cityId) {

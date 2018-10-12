@@ -3,7 +3,7 @@ var Map = require('google-maps-react').Map;
 var InfoWindow = require('google-maps-react').InfoWindow;
 var GoogleApiWrapper = require('google-maps-react').GoogleApiWrapper;
 var PropTypes = require('prop-types');
-var GOOGLE_API_KEY = require('../../.env');
+var GOOGLE_API_KEY = require('../../.env').GOOGLE_API_KEY;
 
 var mapContainerStyle = {
   width: '20em',
@@ -16,7 +16,7 @@ class MapContainer extends React.Component {
     this.state = {
       selectedPlace : {
         name: props.cityName,
-        zoom: 6,
+        zoom: 10,
         lat: props.coords[0],
         lng: props.coords[1],
       },
