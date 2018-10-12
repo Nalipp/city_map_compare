@@ -23,15 +23,13 @@ class MapContainer extends React.Component {
   }
   render() {
     return (
-      <div style={mapContainerStyle}>
-        <Map style={mapContainerStyle} google={this.props.google} 
-          zoom={this.props.zoom} 
-          draggableCursor={'default'}
-          initialCenter={{lat: this.state.selectedPlace.lat, lng: this.state.selectedPlace.lng}}
-          gestureHandling={'none'}
-          disableDefaultUI={true}>
-        </Map>
-      </div>
+      <Map style={mapContainerStyle} google={this.props.google} 
+        zoom={this.props.zoom} 
+        draggableCursor={'default'}
+        initialCenter={{lat: this.state.selectedPlace.lat, lng: this.state.selectedPlace.lng}}
+        gestureHandling={'none'}
+        disableDefaultUI={true}>
+      </Map>
     );
   }
 }
