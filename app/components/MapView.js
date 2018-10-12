@@ -22,14 +22,18 @@ class MapContainer extends React.Component {
     }
   }
   render() {
+   const coords = { lat: -21.805149, lng: -49.0921657 };
+
     return (
-      <Map style={mapContainerStyle} google={this.props.google} 
-        zoom={this.props.zoom} 
-        draggableCursor={'default'}
-        initialCenter={{lat: this.state.selectedPlace.lat, lng: this.state.selectedPlace.lng}}
-        gestureHandling={'none'}
-        disableDefaultUI={true}>
-      </Map>
+      <div style={mapContainerStyle}>
+        <Map style={mapContainerStyle} google={this.props.google} 
+          zoom={this.props.zoom} 
+          draggableCursor={'default'}
+          initialCenter={{lat: this.state.selectedPlace.lat, lng: this.state.selectedPlace.lng}}
+          gestureHandling={'none'}
+          disableDefaultUI={true}>
+        </Map>
+      </div>
     );
   }
 }
