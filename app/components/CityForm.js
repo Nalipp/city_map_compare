@@ -1,9 +1,11 @@
 var React = require('react');
 var PropTypes = require('prop-types');
+var MapView = require('./MapView');
 
 var spaceAroundRow = {
   display: 'flex',
   justifyContent: 'space-around',
+  zIndex: '10',
 }
 
 var inputStyle = {
@@ -25,12 +27,6 @@ var buttonStyle = {
   border: '1px solid lightgrey',
 }
 
-var mapStyle = {
-  width: '25em',
-  height: '25em',
-  background: 'violet',
-}
-
 function ResetCity(props) {
   return (
     <h4 style={{color: 'red', cursor: 'pointer'}} 
@@ -41,21 +37,6 @@ function ResetCity(props) {
 ResetCity.propTypes = {
   onReset: PropTypes.func.isRequired,
   cityId: PropTypes.string.isRequired,
-}
-
-function MapView(props) {
-  return (
-    <div>
-      <h1>{props.city}</h1>
-      <h2>{props.coords}</h2>
-      <div style={mapStyle}></div>
-    </div>
-  )
-}
-
-MapView.propTypes = {
-  city: PropTypes.string.isRequired,
-  coords: PropTypes.array.isRequired,
 }
 
 class FormView extends React.Component {
@@ -115,9 +96,9 @@ class CityForm extends React.Component {
   }
   handleSubmit(cityId, cityName) {
     if (cityId === 'city1') {
-      this.setState({city1: cityName})
+      this.setState({city1: cityName, coords1: [-27.643387, 151.612224]})
     } else {
-      this.setState({city2: cityName})
+      this.setState({city2: cityName, coords2: [24.643387, 121.612224]})
     }
   }
   handleReset(cityId) {
@@ -146,17 +127,17 @@ class CityForm extends React.Component {
 
         <div style={spaceAroundRow}>
           {this.state.city1 && 
-            <MapView city={this.state.city1} coords={this.state.coords1} />}
-          {this.state.city2 && 
-            <MapView city={this.state.city2} coords={this.state.coords2} />}
-        </div>
-
-        <div style={spaceAroundRow}>
-          {this.state.city1 && 
             <ResetCity onReset={this.handleReset} cityId={'city1'}/>}
 
           {this.state.city2 && 
             <ResetCity onReset={this.handleReset} cityId={'city2'} />}
+        </div>
+
+        <div style={spaceAroundRow}>
+          {this.state.city1 && 
+            <MapView city={this.state.city1} coords={this.state.coords1} />}
+          {this.state.city2 && 
+            <MapView city={this.state.city2} coords={this.state.coords2} />}
         </div>
       </div>
     )

@@ -17,3 +17,6 @@ tags
 # Persistent undo
 [._]*.un~
 
+#api key
+.env
+
