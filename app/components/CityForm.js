@@ -27,6 +27,31 @@ var buttonStyle = {
   border: '1px solid lightgrey',
 }
 
+var zoomStyle = {
+  fontSize: '2em',
+  border: '2px solid lightgrey',
+  margin: '0 1em',
+  alignSelf: 'center',
+  padding: '0 .4em',
+  cursor: 'pointer',
+}
+
+function ZoomInputs(props) {
+  return (
+    <div style={spaceAroundRow}>
+      <h1 style={zoomStyle} onClick={props.zoomIn}>+</h1>
+      <h4>{props.zoom}</h4>
+      <h1 style={zoomStyle} onClick={props.zoomOut}>-</h1>
+    </div>
+  )
+}
+
+ZoomInputs.propTypes = {
+  zoom: PropTypes.number.isRequired,
+  zoomIn: PropTypes.func.isRequired,
+  zoomOut: PropTypes.func.isRequired,
+}
+
 function ResetCity(props) {
   return (
     <h4 style={{color: 'red', cursor: 'pointer'}} 
@@ -91,6 +116,7 @@ class CityForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      zoom : 10,
       city1 : '',
       city2 : '',
       coords1 : [],
@@ -98,10 +124,11 @@ class CityForm extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.handleZoomIn = this.handleZoomIn.bind(this);
+    this.handleZoomOut = this.handleZoomOut.bind(this);
   }
   handleSubmit(cityId, data) {
     this.handleReset(cityId)
-    console.log(data); 
     if (cityId === 'city1') {
       this.setState({city1: data.location, coords1: [data.coords.lat, data.coords.lng]})
     } else {
@@ -115,6 +142,12 @@ class CityForm extends React.Component {
       this.setState({city2: '', coords2: []})
     }
   }
+  handleZoomIn() {
+    this.setState({zoom: this.state.zoom + 1});
+  }
+  handleZoomOut() {
+    this.setState({zoom: this.state.zoom - 1});
+  }
   render() {
     return (
       <div>
@@ -124,7 +157,6 @@ class CityForm extends React.Component {
             cityId={'city1'}
             city={this.state.city1} 
             coords={this.state.coords1}/>
-
           <FormView 
             handleSubmit={this.handleSubmit}
             cityId={'city2'}
@@ -136,15 +168,18 @@ class CityForm extends React.Component {
           {this.state.city1 && 
             <ResetCity onReset={this.handleReset} cityId={'city1'}/>}
 
+          {this.state.city1 && this.state.city2 &&
+            <ZoomInputs zoom={this.state.zoom} zoomIn={this.handleZoomIn} zoomOut={this.handleZoomOut} />}
+
           {this.state.city2 && 
             <ResetCity onReset={this.handleReset} cityId={'city2'} />}
         </div>
 
         <div style={spaceAroundRow}>
           {this.state.city1 && 
-            <MapView city={this.state.city1} coords={this.state.coords1} />}
+            <MapView city={this.state.city1} coords={this.state.coords1} zoom={this.state.zoom} />}
           {this.state.city2 && 
-            <MapView city={this.state.city2} coords={this.state.coords2} />}
+            <MapView city={this.state.city2} coords={this.state.coords2} zoom={this.state.zoom} />}
         </div>
       </div>
     )

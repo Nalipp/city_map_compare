@@ -6,8 +6,8 @@ var PropTypes = require('prop-types');
 var GOOGLE_API_KEY = require('../../.env').GOOGLE_API_KEY;
 
 var mapContainerStyle = {
-  width: '20em',
-  height: '20em',
+  width: '25em',
+  height: '25em',
 }
 
 class MapContainer extends React.Component {
@@ -16,7 +16,6 @@ class MapContainer extends React.Component {
     this.state = {
       selectedPlace : {
         name: props.cityName,
-        zoom: 10,
         lat: props.coords[0],
         lng: props.coords[1],
       },
@@ -26,7 +25,7 @@ class MapContainer extends React.Component {
     return (
       <div style={mapContainerStyle}>
         <Map style={mapContainerStyle} google={this.props.google} 
-          zoom={this.state.selectedPlace.zoom} 
+          zoom={this.props.zoom} 
           draggableCursor={'default'}
           initialCenter={{lat: this.state.selectedPlace.lat, lng: this.state.selectedPlace.lng}}
           gestureHandling={'none'}
