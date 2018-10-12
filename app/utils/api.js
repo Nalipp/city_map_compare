@@ -3,7 +3,7 @@ var MAPQUEST_API_KEY = require('../../.env').MAPQUEST_API_KEY;
 
 function getCoords(cityName) {
   return axios.get(
-    'http://www.mapquestapi.com/geocoding/v1/address?key=' + MAPQUEST_API_KEY + '=' + cityName)
+    'https://www.mapquestapi.com/geocoding/v1/address?key=' + MAPQUEST_API_KEY + '=' + cityName)
     .then(function(data) {
       return {
         coords : data.data.results[0].locations[0].latLng,
