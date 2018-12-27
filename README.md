@@ -1,7 +1,7 @@
 # City Map Compare
 
 React App for visualizing the size of cities.
-Synchronous zooming on google maps apo
+Synchronous zooming on google maps api
 
 [link]: https://city-map-compare.firebaseapp.com/
 
